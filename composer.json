@@ -1,0 +1,37 @@
+{
+	"name": "fintech-fab/money-transfer-emulator",
+	"type": "service",
+	"description": "Money Transfer Emulator",
+	"license": "MIT",
+	"keywords": ["payments", "finance", "transfers", "bank"],
+	"homepage": "http://fintech-fab.ru/",
+	"version": "0.1",
+	"authors": [
+		{
+			"name": "Mikhail Novikov",
+			"email": "mikhail.e.novikov@gmail.com"
+		},
+		{
+			"name": "Vladimir Yuldashev",
+			"email": "misterio92@gmail.com"
+		}
+	],
+	"require": {
+		"php": ">=5.3.0",
+		"laravel/framework": "4.1.*"
+	},
+	"require-dev": {
+		"mockery/mockery": "dev-master"
+	},
+	"autoload": {
+		"classmap": [
+			"src/migrations",
+			"src/controllers",
+			"tests/MoneyTransferEmulatorTestCase.php"
+		],
+		"psr-0": {
+			"FintechFab\\MoneyTransferEmulator\\": "src/"
+		}
+	},
+	"minimum-stability": "dev"
+}

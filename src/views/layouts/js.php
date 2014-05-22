@@ -156,15 +156,19 @@
 
 		$button.off('click');
 		$button.on('click', function () {
-			$button.button('loading');
-			var json = {id: $button.data('id')};
+			var $thisButton = $(this);
+			$thisButton.button('loading');
+			var json = {id: $thisButton.data('id')};
 			$.post(url, json, function (json) {
+				if(json && json.status){
+					$thisButton.parents('tr').find('td.status').html(json.status);
+				}
 				if (json && json.next) {
-					$button.button('reset');
-					$button.text(json.value);
+					$thisButton.button('reset');
+					$thisButton.text(json.value);
 					postApproveButton();
 				} else {
-					$button.remove();
+					$thisButton.remove();
 				}
 
 			});

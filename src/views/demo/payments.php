@@ -32,7 +32,7 @@ use FintechFab\MoneyTransferEmulator\Models\Payment;
 				<td><?= $payment->cityName() ?></td>
 				<td><?= $payment->from ?></td>
 				<td><?= $payment->to ?></td>
-				<td><?= $payment->status ?></td>
+				<td class="status"><?= $payment->status ?></td>
 				<td>
 					<?php
 					if ($payment->getPossibleStatus()) {

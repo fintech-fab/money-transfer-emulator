@@ -116,6 +116,7 @@ class DemoController extends Controller
 					return array(
 						'next'  => true,
 						'value' => 'Move to [' . $payment->getPossibleStatus() . ']',
+						'status' => $payment->status,
 					);
 				}
 
@@ -125,6 +126,7 @@ class DemoController extends Controller
 
 		return array(
 			'next' => false,
+			'status' => $payment? $payment->status: null,
 		);
 
 	}

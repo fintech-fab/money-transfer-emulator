@@ -5,6 +5,12 @@ Service gateway emulates the international money transfer system.
 Simple and debug web interface inside.
 Install and use path /mt/emulator/demo in your web project.
 
+- PHP SDK: https://github.com/fintech-fab/money-transfer-emulator-sdk
+- Full debug web-form
+- Public demo: Coming soon
+
+
+
 # Requirements
 
 - php >=5.3.0

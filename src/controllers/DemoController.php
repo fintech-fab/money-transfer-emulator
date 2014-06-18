@@ -29,6 +29,16 @@ class DemoController extends Controller
 		$this->make('index');
 	}
 
+	public function docs()
+	{
+		$this->make('docs');
+	}
+
+	public function sdk()
+	{
+		$this->make('sdk');
+	}
+
 	/**
 	 * Terminal info
 	 * auto-create new term if not exists

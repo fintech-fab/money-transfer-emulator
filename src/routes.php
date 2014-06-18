@@ -14,6 +14,14 @@ Route::group(
 			'as'   => 'ff-mt-em-demo',
 			'uses' => 'DemoController@index',
 		));
+		Route::get('docs', array(
+			'as'   => 'ff-mt-em-docs',
+			'uses' => 'DemoController@docs',
+		));
+		Route::get('sdk', array(
+			'as'   => 'ff-mt-em-sdk',
+			'uses' => 'DemoController@sdk',
+		));
 		Route::get('error', array(
 			'as'   => 'ff-mt-em-error',
 			'uses' => 'DemoController@error',

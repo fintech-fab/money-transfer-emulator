@@ -20,7 +20,7 @@ Route::filter('ff-mt-em-auth', function () {
 	$user_id = (int)$user_id;
 	if ($user_id <= 0) {
 		return Redirect::to(URL::route('ff-mt-em-error', array(), false))
-			->with('errorMessage', 'Please configure Auth Identifier into your local config!');
+			->with('errorMessage', 'Чтобы пользоваться шлюзом, необходима авторизация на сайте. Или, если вы установили шлюз к себе на сервер, настройте значение user_id в локальной конфигурации вашего проекта.');
 	}
 
 	return null;

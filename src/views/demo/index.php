@@ -1,129 +1,61 @@
 <?php
 
-use FintechFab\MoneyTransferEmulator\Components\Processor\Input;
-use FintechFab\MoneyTransferEmulator\Components\Processor\Response;
-use FintechFab\MoneyTransferEmulator\Components\Processor\Type;
+use FintechFab\MoneyTransferEmulator\Components\Helpers\Views;
 
 ?>
-
-
 <div class="row container">
-	<div class="col-md-12">
+	<div class="col-md-7">
 
-		<div class="panel panel-primary">
-			<div class="panel-heading">
-				<h3 class="panel-title">Типы запросов</h3>
-			</div>
-			<div class="panel-body">
-				<table class="table table-striped table-hover">
+		<h2>About</h2>
 
-					<tr>
-						<th>Тип запроса</th>
-						<th>Комментарий</th>
-						<th>Параметры</th>
-					</tr>
+		<p>Это имитация сервиса адресного перевода денег<br>(по сути похоже на WesternUnion) с процессами:</p>
 
-					<?php foreach (Type::$typeNames as $key => $val) { ?>
-						<tr>
-							<td><?= $key ?></td>
-							<td><?= $val ?></td>
-							<td><?= implode(', ', Type::$fields[$key]) ?></td>
-						</tr>
-					<?php } ?>
-
-				</table>
-			</div>
-		</div>
+		<ul>
+			<li>Список городов<br> &mdash; <i>
+					<small>Получить список городов, куда можно отправить деньги</small>
+				</i></li>
+			<li>Расчет комиссии<br> &mdash; <i>
+					<small>Запрос на сумму комиссии для перевода N единиц валюты в определенный город</small>
+				</i></li>
+			<li>Проверка возможности перевода<br> &mdash; <i>
+					<small>Запрос с реквизитами перевода, ответ "можно" или "нельзя"</small>
+				</i></li>
+			<li>Регистрация перевода<br> &mdash; <i>
+					<small>Запрос на перевод</small>
+				</i></li>
+			<li>Проверка статуса<br> &mdash; <i>
+					<small>Запрос на статус</small>
+				</i></li>
+			<li>Отмена платежа<br> &mdash; <i>
+					<small>Запрос на отмену, если платеж еще не был исполнен</small>
+				</i></li>
+		</ul>
 
 	</div>
-</div>
 
+	<div class="col-md-5">
 
-<div class="row container">
-	<div class="col-md-12">
+		<h2>Profit</h2>
 
-		<div class="panel panel-primary">
-			<div class="panel-heading">
-				<h3 class="panel-title">Параметры ответа</h3>
-			</div>
-			<div class="panel-body">
-				<?= implode(', ', Response::$responseFields) ?>
-			</div>
-		</div>
+		<p>Пользуйтесь шлюзом, чтобы отладить/протестировать процесс подключения к подобному "настоящему" сервису в вашем проекте.</p>
 
-	</div>
-</div>
+		<p>Чтобы начать, <a href="<?= Views::link2Sign() ?>">авторизуйтесь здесь</a>, потом
+			<a href="<?= URL::route('ff-mt-em-term') ?>">здесь</a> вам будет сгенерирован банковский терминал с
+			id-шником и ключом.</p>
 
-<div class="row container">
-	<div class="col-md-12">
+		<p>Там же находятся формы для отладки шлюза.</p>
 
-		<div class="panel panel-primary">
-			<div class="panel-heading">
-				<h3 class="panel-title">Параметры ответа при ошибке</h3>
-			</div>
-			<div class="panel-body">
-				type=error, code, message, time
-			</div>
-		</div>
+		<p>Для подключения шлюза к вашему проекту используйте <a href="<?= URL::route('ff-mt-em-sdk') ?>">PHP SDK</a>.
+		</p>
+
+		<h2>Tags</h2>
+
+		<p>
+			<a href="<?= URL::route('ff-mt-em-docs') ?>">Справочник</a>,
+			<a href="<?= URL::route('ff-mt-em-sdk') ?>">PHP SDK</a>,
+			<a href="https://github.com/fintech-fab/money-transfer-emulator">GitHub</a>, <a href="http://laravel.com">Laravel</a>
+		</p>
 
 	</div>
-</div>
 
-<div class="row container">
-	<div class="col-md-12">
-
-		<div class="panel panel-primary">
-			<div class="panel-heading">
-				<h3 class="panel-title">Описание параметров</h3>
-			</div>
-			<div class="panel-body">
-				<table class="table table-striped table-hover">
-
-					<tr>
-						<th>Параметр</th>
-						<th>Правило</th>
-						<th>Описание</th>
-					</tr>
-
-					<?php foreach (Input::$rules as $key => $val) { ?>
-						<tr>
-							<td><?= $key ?></td>
-							<td><?= $val ?></td>
-							<td><?= Input::$paramNames[$key] ?></td>
-						</tr>
-					<?php } ?>
-
-				</table>
-			</div>
-		</div>
-
-	</div>
-</div>
-
-<div class="row container">
-	<div class="col-md-12">
-
-		<div class="panel panel-primary">
-			<div class="panel-heading">
-				<h3 class="panel-title">Формирование/проверка подписи</h3>
-			</div>
-			<div class="panel-body">
-				<pre>
-					<?php highlight_string(
-						"<?php\n" .
-						"/**\n" .
-						" * @var string \$type   тип запроса\n" .
-						" * @var array  \$params параметры запроса\n" .
-						" * @var string \$secret ключ продавца\n" .
-						" */\n" .
-						"ksort(\$params);\n" .
-						"\$str4sign = implode('|', \$params);\n" .
-						"\$sign = md5(\$str4sign . \$type . \$secret);\n" .
-						"?>"
-					) ?>
-				</pre>
-			</div>
-		</div>
-
-	</div>
 </div>

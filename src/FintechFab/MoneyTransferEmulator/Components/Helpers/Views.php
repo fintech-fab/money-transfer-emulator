@@ -3,8 +3,10 @@
 namespace FintechFab\MoneyTransferEmulator\Components\Helpers;
 
 
+use Config;
 use FintechFab\MoneyTransferEmulator\Components\Processor\Input;
 use Form;
+use URL;
 
 class Views
 {
@@ -66,5 +68,13 @@ class Views
 
 	}
 
+	public static function link2Sign()
+	{
+		$url = Config::get('ff-mt-em::ff.login.link');
+
+		return self::url($url, array(
+			'back' => urlencode(URL::current()),
+		));
+	}
 
 }
